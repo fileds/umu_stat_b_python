@@ -12,19 +12,31 @@ Ni kan välja flera olika sätt att köra Python, här är tre alternativ.
 
 **1. Google Colab**
 
-Google colab är ett enkelt sätt att komma igång med Python i ett notebook format. 
+Google Colab är ett enkelt sätt att komma igång med Python i ett notebook format och kräver ingen installation men kräver ett Google-konto(?).
 
 **2. RStudio**
 
-Att köra Python i RStudio är inte optimalt, eftersom Python-koden körs via `reticulate`-paketet, men det är ett bra sätt att komma igång snabbt. Ni (kan) behöva installera både Python och de följande R-paketen.
+Att köra Python i RStudio är inte optimalt, eftersom Python-koden körs via `reticulate`-paketet, men det är ett bra sätt att komma igång snabbt. Ni behöver installera både Python (se guide nedan) och R-paketet `reticulate`.
 
-```r
+``` r
 install.packages("reticulate")
 ```
 
+Ni kan sen öppna en ny fil och välja "Python script" för att köra Python, direkt i RStudio.
+
 **3. Visual Studio eller annan editor**
 
-Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera Python på er dator och använda en annan editor, t.ex. Microsofts Visual Studio. 
+Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera Python på er dator och använda en annan editor, t.ex. Microsofts Visual Studio. Ni behöver installera Python (se guide nedan) och förslagsvis en IDE.
+
+### Installations guide
+
+1. Gå till [](https://www.python.org/downloads/release/python-3120/) och scrolla längst ned till filer. Välj den fil som passar ditt operativsystem.
+2. Installera Python enligt installations "wizarden".
+3. Installera nödvändiga Python-paket:
+    - **Windows**: Öppna "Command Prompt" och skriv in följande kommando `py -m pip install --upgrade pip numpy pandas matplotlib`
+    - **Mac**: Öppna "Terminal" och skriv in följande kommando `python3 -m pip install --upgrade pip numpy pandas matplotlib`
+    
+Python och de paket vi behöver ska nu vara installerade på er dator. 
 
 ## Stil
 
@@ -38,7 +50,7 @@ R kod följer allt för sällan en enhetlig stil. Python har en [stilguide](http
 
 ### Syntax
 
-Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk, så som tilldelning (<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. I den här uppgiften ska du skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs.
+Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk, så som tilldelning (\<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. I den här uppgiften ska du skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs.
 
 **Tilldelning**
 
@@ -64,8 +76,8 @@ y = "hello"
 
 En datastruktur är ett objekt som strukturerar data och möjliggör sökning, kategorisering, och lagring av information. I R används primärt två datastrukturer, vektorer och listor. I Python finns inga vektorer, bara listor, men också fler datatyper som "tuples" och "dictionaries". Använd internet, LLMs, eller [den här dokumentationen](https://docs.python.org/3/tutorial/datastructures.html#) för att läsa mer om listor, tuples, och dictionaries i Python. Gör sedan följande uppgifter:
 
-1. Skriv sedan om den här koden till Python kod med rätt datatyper (datastrukturer). 
-2. Redogör för skillnaden mellan en lista och en tuple.
+1.  Skriv sedan om den här koden till Python kod med rätt datatyper (datastrukturer).
+2.  Redogör för skillnaden mellan en lista och en tuple.
 
 Tips: För att se en värdet av en variabel i Python, använd funktionen `print` (om ni använder notebooks så kan ni skriva ut variabeln, precis som i R).
 
@@ -96,7 +108,6 @@ print(l)
 d = {"apple": "crunchy", "orange": "juicy", "pear": "sweet"}
 print(d)
 ```
-
 
 ### Loopar och if/else-satser
 
