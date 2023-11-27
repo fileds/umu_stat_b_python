@@ -16,21 +16,27 @@ Google colab är ett enkelt sätt att komma igång med Python i ett notebook for
 
 **2. RStudio**
 
-Att köra Python i RStudio är inte optimalt, eftersom det bygger på speciella R-paket, men det är ett bra sätt att komma igång snabbt. Ni kan behöva installera både Python och de följande R-paketen.
+Att köra Python i RStudio är inte optimalt, eftersom Python-koden körs via `reticulate`-paketet, men det är ett bra sätt att komma igång snabbt. Ni (kan) behöva installera både Python och de följande R-paketen.
 
 ```r
 install.packages("reticulate")
-reticulate::py_install("numpy")
-reticulate::py_install("matplotlib")
-reticulate::py_install("jupyter")
-reticulate::py_install("pandas")
 ```
 
 **3. Visual Studio eller annan editor**
 
-Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera Python på er dator och använda en annan editor, t.ex. Microsofts Visual Studio. Väljer ni det här alterativet så får ni lösa det själv.
+Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera Python på er dator och använda en annan editor, t.ex. Microsofts Visual Studio. 
 
-## Uppgift 1 - Syntax
+## Stil
+
+R kod följer allt för sällan en enhetlig stil. Python har en [stilguide](https://peps.python.org/pep-0008/) som ni inte behöver läsa, men som är nyttig om ni vill skriva mer Python-kod. Stil kan variera, och om ni skriver kod i ett sammanhang som redan har en stil så bör ni följa den. Nedan listas några enkla regler att följa som är vanligt förekommande i flera programmeringsspråk. Ni förväntas följa dem i den här labben.
+
+* Variabel- och funktionsnamn följer `lower_case_with_underscore`
+* Klassnamn följer `CapWords`
+* 4 mellanslags indenteringsavstånd
+
+## Uppgift 1 - grunder
+
+### Syntax
 
 Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk, så som tilldelning (<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. I den här uppgiften ska du skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs.
 
@@ -92,7 +98,7 @@ print(d)
 ```
 
 
-## Loopar och if/else-satser
+### Loopar och if/else-satser
 
 Python använder inte "måsvingar" som i R, istället används indentering för att bestämma vilken kod som exekveras inom en loop eller en if-sats. Likt R så fungerar for-looparna som "foreach"-loopar, där det man "loopar" över är innehållet i en datastruktur, till exempel en vektor eller lista. Läs på internet, använd LLMs, eller kolla på [den här dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#if-statements) för att se exempel och lära er mer om for-loopar och if-satser. Skriv om den följande R-koden till Python-kod.
 
@@ -116,56 +122,261 @@ for number in numbers:
         print("Five")
 ```
 
-## Loops
+### Funktioner
+
+För att definera en funktion i R använder vi `function`, men i Python använder man istället `def` och sedan funktionsnamnet. Läs den här [dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#defining-functions) och översätt följande kod.
 
 **R**
 
-``` r
-# For loop
-for (i in 1:5) {
-  print(i)
+```{r}
+multiply <- function(x, y) {
+    return(x * y)
 }
+multiply(2, 22)
 ```
 
 **Python**
 
 ```{python}
-# For loop
-for i in range(1, 6):
-    print(i)
+def multiply(x, y):
+    return x * y
+multiply(2, 22)
 ```
 
-## Function Definitions
+### Paket
 
-**R**
+R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera `tidyverse` för dataanalys). Python är ett "general purpose programming language" och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. [`numpy`](https://numpy.org/) används för matematiska beräkningar och är ett väldigt vanligt paket, [`pandas`](https://pandas.pydata.org/) är populärt för att jobba med tabelldata, motsvarande `data.frames` i R, och [`matplotlib`](https://matplotlib.org/) är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om de här paketen specifikt, men ni ska använda dem för att skriva om den följande koden från R till Python. Tips: För att importera paket i python så kan ni använda följande kod:
 
-``` r
-# Defining a function
-add <- function(a, b) {
-  return(a + b)
-}
-```
-
-**Python**
-
-```{python}
-# Defining a function
-def add(a, b):
-    return a + b
-```
-
-## Library Imports
-
-**R**
-
-``` r
-# Importing a library
-library(ggplot2)
-```
-
-**Python**
-
-```{python}
-# Importing a library
+```python
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 ```
+
+Om ni kör Python i RStudio så behöver ni installera Python-paketen genom följande kod:
+
+```{r}
+#| eval: false
+reticulate::py_install("numpy")
+reticulate::py_install("matplotlib")
+reticulate::py_install("pandas")
+```
+
+**R**
+
+```{r}
+#| eval: false
+# Using base R
+penguins <- read.csv("penguins.csv")
+# Print head of data frame
+head(penguins)
+# Print head of species column
+head(penguins$species)
+# Compute mean of flipper_length_mm
+mean(penguins$flipper_length_mm, na.rm = TRUE)
+# Plot bill_length_mm vs bill_depth_mm
+plot(penguins$bill_length_mm, penguins$bill_depth_mm)
+```
+
+```{r}
+# Using tidyverse and piping
+library(tidyverse)
+penguins <- read_csv("penguins.csv")
+# Print head of data frame
+penguins |> head()
+# Print head of species column
+penguins |> 
+    select(species) |> 
+    head()
+# Compute mean of flipper_length_mm
+penguins |> 
+    pull(flipper_length_mm) |> 
+    mean(na.rm = TRUE)
+# Plot bill_length_mm vs bill_depth_mm
+penguins |> 
+    ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+    geom_point() + 
+    theme_bw()
+```
+
+**Python**
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load data frame
+penguins = pd.read_csv("penguins.csv")
+# Print head of dataframe
+penguins.head()
+# Print head of species column
+penguins["species"].head()
+# Compute mean of flipper_length_mm
+np.mean(penguins["flipper_length_mm"])
+# Plot bill_length_mm vs bill_depth_mm
+plt.scatter(penguins["bill_length_mm"], penguins["bill_depth_mm"])
+plt.show()
+```
+
+### Objektorienterad programmering
+
+R är ett "functional programming languange" som lämpar sig för att använda funktioner på funktioner, därav "pipe"-operatorn. Python tillåter "functional programming" men mycket Python-kod är skrivet som "Object Oriented Programming (OOP)". Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kalalde fält, och funktioner, ibland kallade metoder. EN annan kraftfull idé inom objektorienterad programmering är klasser som ärver från superklasser. I den här uppgiften ska ni skriva om R kod till objektorienterad Python kod. Först visar vi ett exempel på objectorienterad kod skriven i Python. I det här exemplet ser vi hur klassen `Bike` skapas genom att ärva klassen `Vehicle` och implementera funktionen `n_wheels` som returnerar antalet hjul fordonet har. Vi använder sedan punkt `.` för att komma åt fält och metoder inom klassen. Notera att `.` är reserverat för det här ändamålet i Python, ni kan därmed inte använda det i variabelnamn.
+
+```{python}
+# Define super class Vehicle
+class Vehicle:
+    def __init__(self, name):
+        self.name = name
+    
+    # Define function returning the number of wheels of the vehicle
+    def n_wheels(self):
+        raise NotImplementedError("Subclass must implement this method")
+
+# Defining Bike class, inheriting from Vehicle
+class Bike(Vehicle):
+    def n_wheels(self):
+        return 2
+    
+bike = Bike("Crescent")
+# Using the dot, ., to access class fields
+bike.name
+# Using the dot, ., to access class method
+bike.n_wheels()
+```
+
+Baserat på det här exemplet, skriv om följande R-kod till Python-kod med en superklass `Animal` och två subklasser, `Dog` och `Cat` som implementerar funktionen `speak`.
+
+**R**
+
+```{r}
+# Define the generic speak method
+speak <- function(animal) {
+  UseMethod("speak", animal)
+}
+
+# Define the Animal class constructor
+Animal <- function(name) {
+  class <- "Animal"
+  list(name = name, class = class)
+}
+
+# Define the Dog class constructor
+Dog <- function(name) {
+  animal <- Animal(name)
+  class(animal) <- c("Dog", class(animal))
+  animal
+}
+
+# Define the Cat class constructor
+Cat <- function(name) {
+  animal <- Animal(name)
+  class(animal) <- c("Cat", class(animal))
+  animal
+}
+
+# Define the speak method for Animal (base)
+speak.Animal <- function(animal) {
+  stop("Subclass must implement this method")
+}
+
+# Define the speak method for Dog
+speak.Dog <- function(animal) {
+  paste(animal$name, "says Woof!")
+}
+
+# Define the speak method for Cat
+speak.Cat <- function(animal) {
+  paste(animal$name, "says Meow!")
+}
+
+# Demonstrating Polymorphism
+animals <- list(Dog("Buddy"), Cat("Whiskers"))
+
+for (animal in animals) {
+  print(speak(animal))
+}
+
+```
+
+**Python**
+
+```{python}
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplementedError("Subclass must implement this method")
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+# Demonstrating Polymorphism
+animals = [Dog("Buddy"), Cat("Whiskers")]
+
+for animal in animals:
+    print(animal.speak())
+
+```
+
+### Uppgift 2 - Centrala gränsvärdessatsen
+
+I den här uppgiften ska ni simulera medelvärdet från 1000 stickprov från (a) N$(1, 1)$ (b) Exp$(1)$, för tre olika stickprovsstorlekar, $N = 5, 10, 30$, och sedan visualisera era resultat i histogram. 
+
+**R**
+
+```{r}
+library(tidyverse)
+n_replicates <- 1000
+sample_sizes <- c(5, 10, 30)
+
+# Storing in tibble, slow, but neat for plotting results
+results <- tibble(
+    sample_size = integer(0),
+    replicate = integer(0),
+    mean = numeric(0),
+    distribution = character(0)
+)
+for (sample_size in sample_sizes)
+{
+    for (replicate in 1:n_replicates)
+    {
+        mu_norm <- mean(rnorm(sample_size, 1, 1))
+        mu_exp <- mean(rexp(sample_size))
+        results <- rbind(
+            results,
+            data.frame(
+                sample_size = sample_size,
+                replicate = replicate,
+                mean = mu_norm,
+                distribution = "norm"),
+            data.frame(
+                sample_size = sample_size,
+                replicate = replicate,
+                mean = mu_exp,
+                distribution = "exp"))
+    }
+    
+}
+results |> 
+    ggplot(aes(x = mean, fill = distribution)) + 
+    geom_histogram(alpha = 0.5, col = "black") +
+    facet_wrap(~ sample_size, scales = "free") +
+    labs(
+        x = "Mean",
+        y = "Count",
+        fill = "Sample size") +
+  theme(legend.position = "top")
+
+```
+
+
+
+
+
