@@ -6,11 +6,17 @@ editor: visual
 jupyter: python3
 ---
 
-# Basic Syntax in Python and R
+## Komma igång
 
-Innan lektionen:
+Ni kan välja flera olika sätt att köra Python, här är tre alternativ.
 
-Om ni vill använda RStudio, kör följande kod:
+**1. Google Colab**
+
+Google colab är ett enkelt sätt att komma igång med Python i ett notebook format. 
+
+**2. RStudio**
+
+Att köra Python i RStudio är inte optimalt, eftersom det bygger på speciella R-paket, men det är ett bra sätt att komma igång snabbt. Ni kan behöva installera både Python och de följande R-paketen.
 
 ```r
 install.packages("reticulate")
@@ -20,42 +26,101 @@ reticulate::py_install("jupyter")
 reticulate::py_install("pandas")
 ```
 
-## Assignment
+**3. Visual Studio eller annan editor**
+
+Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera Python på er dator och använda en annan editor, t.ex. Microsofts Visual Studio. Väljer ni det här alterativet så får ni lösa det själv.
+
+## Uppgift 1 - Syntax
+
+Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk, så som tilldelning (<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. I den här uppgiften ska du skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs.
+
+**Tilldelning**
+
+I R används `<-` för att tilldela variabler värden medan Python istället använder `=`. Skriv om följande kod till Python kod och se till att den går att köra.
 
 **R**
-```r
+
+``` r
 # Assigning a value to a variable
 x <- 10
 y <- "hello"
 ```
 
 **Python**
+
 ```{python}
 # Assigning a value to a variable
 x = 10
 y = "hello"
 ```
 
-## Indexing
+## Datastrukturer och indexering
+
+En datastruktur är ett objekt som strukturerar data och möjliggör sökning, kategorisering, och lagring av information. I R används primärt två datastrukturer, vektorer och listor. I Python finns inga vektorer, bara listor, men också fler datatyper som "tuples" och "dictionaries". Använd internet, LLMs, eller [den här dokumentationen](https://docs.python.org/3/tutorial/datastructures.html#) för att läsa mer om listor, tuples, och dictionaries i Python. Gör sedan följande uppgifter:
+
+1. Skriv sedan om den här koden till Python kod med rätt datatyper (datastrukturer). 
+2. Redogör för skillnaden mellan en lista och en tuple.
+
+Tips: För att se en värdet av en variabel i Python, använd funktionen `print` (om ni använder notebooks så kan ni skriva ut variabeln, precis som i R).
 
 **R**
-```r
-# Creating a vector and accessing its elements
-vec <- c(1, 2, 3, 4, 5)
-first_element <- vec[1]
+
+```{r}
+# Vector
+v <- c(1, 2, 3)
+v
+# List
+l <- list("Apple", "Orange", "Pear")
+l
+# Dictionary
+d <- list(apple = "crunchy", orange = "juicy", pear = "sweet")
+d
 ```
 
 **Python**
+
 ```{python}
-# Creating a list and accessing its elements
-vec = [1, 2, 3, 4, 5]
-first_element = vec[0]
+# List
+v = [1, 2, 3]
+print(v)
+# List
+l = ["Apple", "Orange", "Pear"]
+print(l)
+# Dictionary
+d = {"apple": "crunchy", "orange": "juicy", "pear": "sweet"}
+print(d)
+```
+
+
+## Loopar och if/else-satser
+
+Python använder inte "måsvingar" som i R, istället används indentering för att bestämma vilken kod som exekveras inom en loop eller en if-sats. Likt R så fungerar for-looparna som "foreach"-loopar, där det man "loopar" över är innehållet i en datastruktur, till exempel en vektor eller lista. Läs på internet, använd LLMs, eller kolla på [den här dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#if-statements) för att se exempel och lära er mer om for-loopar och if-satser. Skriv om den följande R-koden till Python-kod.
+
+**R**
+
+```{r}
+numbers <- seq(1, 10)
+for (number in numbers) {
+  print(number)  
+  if (number == 5) print("Five")
+}
+```
+
+**Python**
+
+```{python}
+numbers = range(1, 10)
+for number in numbers:
+    print(number)
+    if number == 5:
+        print("Five")
 ```
 
 ## Loops
 
 **R**
-```r
+
+``` r
 # For loop
 for (i in 1:5) {
   print(i)
@@ -63,6 +128,7 @@ for (i in 1:5) {
 ```
 
 **Python**
+
 ```{python}
 # For loop
 for i in range(1, 6):
@@ -72,7 +138,8 @@ for i in range(1, 6):
 ## Function Definitions
 
 **R**
-```r
+
+``` r
 # Defining a function
 add <- function(a, b) {
   return(a + b)
@@ -80,6 +147,7 @@ add <- function(a, b) {
 ```
 
 **Python**
+
 ```{python}
 # Defining a function
 def add(a, b):
@@ -89,12 +157,14 @@ def add(a, b):
 ## Library Imports
 
 **R**
-```r
+
+``` r
 # Importing a library
 library(ggplot2)
 ```
 
 **Python**
+
 ```{python}
 # Importing a library
 import matplotlib.pyplot as plt
