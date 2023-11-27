@@ -1,0 +1,101 @@
+---
+title: "Introduktion till Python"
+author: "Filip Edström"
+format: pdf
+editor: visual
+jupyter: python3
+---
+
+# Basic Syntax in Python and R
+
+Innan lektionen:
+
+Om ni vill använda RStudio, kör följande kod:
+
+```r
+install.packages("reticulate")
+reticulate::py_install("numpy")
+reticulate::py_install("matplotlib")
+reticulate::py_install("jupyter")
+reticulate::py_install("pandas")
+```
+
+## Assignment
+
+**R**
+```r
+# Assigning a value to a variable
+x <- 10
+y <- "hello"
+```
+
+**Python**
+```{python}
+# Assigning a value to a variable
+x = 10
+y = "hello"
+```
+
+## Indexing
+
+**R**
+```r
+# Creating a vector and accessing its elements
+vec <- c(1, 2, 3, 4, 5)
+first_element <- vec[1]
+```
+
+**Python**
+```{python}
+# Creating a list and accessing its elements
+vec = [1, 2, 3, 4, 5]
+first_element = vec[0]
+```
+
+## Loops
+
+**R**
+```r
+# For loop
+for (i in 1:5) {
+  print(i)
+}
+```
+
+**Python**
+```{python}
+# For loop
+for i in range(1, 6):
+    print(i)
+```
+
+## Function Definitions
+
+**R**
+```r
+# Defining a function
+add <- function(a, b) {
+  return(a + b)
+}
+```
+
+**Python**
+```{python}
+# Defining a function
+def add(a, b):
+    return a + b
+```
+
+## Library Imports
+
+**R**
+```r
+# Importing a library
+library(ggplot2)
+```
+
+**Python**
+```{python}
+# Importing a library
+import matplotlib.pyplot as plt
+```
