@@ -4,9 +4,9 @@ I den här labben går vi igenom grunderna i Python. Under labbens gång kommer 
 
 ## Examination
 
-Labben examineras på plats genom att ni visar upp era lösningar och förklarar vad ni har gjort.
+Labben examineras på plats genom att ni visar upp era lösningar och förklarar vad ni har gjort. För en godkänd lab ska ni kunna visa, förklara, och köra er kod.
 
 ## Instruktioner
 
-Följ instruktionerna i labbanvisningarna
+Följ instruktionerna i labbanvisningar.html
 
