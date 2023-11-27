@@ -1,9 +1,11 @@
 ---
 title: "Introduktion till Python"
 author: "Filip Edström"
-format: pdf
+format: 
+  html:
+    embed-resources: true
+    toc: true
 editor: visual
-jupyter: python3
 ---
 
 ## Komma igång
@@ -30,23 +32,25 @@ Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera P
 
 ### Installations guide
 
-1. Gå till [](https://www.python.org/downloads/release/python-3120/) och scrolla längst ned till filer. Välj den fil som passar ditt operativsystem.
-2. Installera Python enligt installations "wizarden".
-3. Installera nödvändiga Python-paket:
-    - **Windows**: Öppna "Command Prompt" och skriv in följande kommando `py -m pip install --upgrade pip numpy pandas matplotlib`
-    - **Mac**: Öppna "Terminal" och skriv in följande kommando `python3 -m pip install --upgrade pip numpy pandas matplotlib`
-    
-Python och de paket vi behöver ska nu vara installerade på er dator. 
+1.  Gå till och scrolla längst ned till filer. Välj den fil som passar ditt operativsystem.
+2.  Installera Python enligt installations "wizarden".
+3.  Installera nödvändiga Python-paket:
+    -   **Windows**: Öppna "Command Prompt" och skriv in följande kommando `py -m pip install --upgrade pip numpy pandas matplotlib`
+    -   **Mac**: Öppna "Terminal" och skriv in följande kommando `python3 -m pip install --upgrade pip numpy pandas matplotlib`
+
+Python och de paket vi behöver ska nu vara installerade på er dator.
 
 ## Stil
 
 R kod följer allt för sällan en enhetlig stil. Python har en [stilguide](https://peps.python.org/pep-0008/) som ni inte behöver läsa, men som är nyttig om ni vill skriva mer Python-kod. Stil kan variera, och om ni skriver kod i ett sammanhang som redan har en stil så bör ni följa den. Nedan listas några enkla regler att följa som är vanligt förekommande i flera programmeringsspråk. Ni förväntas följa dem i den här labben.
 
-* Variabel- och funktionsnamn följer `lower_case_with_underscore`
-* Klassnamn följer `CapWords`
-* 4 mellanslags indenteringsavstånd
+-   Variabel- och funktionsnamn följer `lower_case_with_underscore`
+-   Klassnamn följer `CapWords`
+-   4 mellanslags indenteringsavstånd
 
 ## Uppgift 1 - grunder
+
+Ni kan lösa följande uppgifter antingen genom att skriva koden i Google Colab, använd i så fall en cell till en uppgift, eller i RStudio med hjälp av `reticulate`, eller i någon annan IDE, så länge ni kan visa upp, förklara, och köra koden. Väljer ni att lösa uppgiften i RStudio kan ni använda det här dokumentet och skriva in era lösningar, se exempel i första uppgiften
 
 ### Syntax
 
@@ -58,7 +62,7 @@ I R används `<-` för att tilldela variabler värden medan Python istället anv
 
 **R**
 
-``` r
+```{r}
 # Assigning a value to a variable
 x <- 10
 y <- "hello"
@@ -67,9 +71,8 @@ y <- "hello"
 **Python**
 
 ```{python}
-# Assigning a value to a variable
-x = 10
-y = "hello"
+#| eval: false
+# Write your solution here
 ```
 
 ## Datastrukturer och indexering
@@ -95,20 +98,6 @@ d <- list(apple = "crunchy", orange = "juicy", pear = "sweet")
 d
 ```
 
-**Python**
-
-```{python}
-# List
-v = [1, 2, 3]
-print(v)
-# List
-l = ["Apple", "Orange", "Pear"]
-print(l)
-# Dictionary
-d = {"apple": "crunchy", "orange": "juicy", "pear": "sweet"}
-print(d)
-```
-
 ### Loopar och if/else-satser
 
 Python använder inte "måsvingar" som i R, istället används indentering för att bestämma vilken kod som exekveras inom en loop eller en if-sats. Likt R så fungerar for-looparna som "foreach"-loopar, där det man "loopar" över är innehållet i en datastruktur, till exempel en vektor eller lista. Läs på internet, använd LLMs, eller kolla på [den här dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#if-statements) för att se exempel och lära er mer om for-loopar och if-satser. Skriv om den följande R-koden till Python-kod.
@@ -121,16 +110,6 @@ for (number in numbers) {
   print(number)  
   if (number == 5) print("Five")
 }
-```
-
-**Python**
-
-```{python}
-numbers = range(1, 10)
-for number in numbers:
-    print(number)
-    if number == 5:
-        print("Five")
 ```
 
 ### Funktioner
@@ -146,19 +125,11 @@ multiply <- function(x, y) {
 multiply(2, 22)
 ```
 
-**Python**
-
-```{python}
-def multiply(x, y):
-    return x * y
-multiply(2, 22)
-```
-
 ### Paket
 
 R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera `tidyverse` för dataanalys). Python är ett "general purpose programming language" och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. [`numpy`](https://numpy.org/) används för matematiska beräkningar och är ett väldigt vanligt paket, [`pandas`](https://pandas.pydata.org/) är populärt för att jobba med tabelldata, motsvarande `data.frames` i R, och [`matplotlib`](https://matplotlib.org/) är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om de här paketen specifikt, men ni ska använda dem för att skriva om den följande koden från R till Python. Tips: För att importera paket i python så kan ni använda följande kod:
 
-```python
+``` python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -208,26 +179,6 @@ penguins |>
     ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
     geom_point() + 
     theme_bw()
-```
-
-**Python**
-
-```{python}
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Load data frame
-penguins = pd.read_csv("penguins.csv")
-# Print head of dataframe
-penguins.head()
-# Print head of species column
-penguins["species"].head()
-# Compute mean of flipper_length_mm
-np.mean(penguins["flipper_length_mm"])
-# Plot bill_length_mm vs bill_depth_mm
-plt.scatter(penguins["bill_length_mm"], penguins["bill_depth_mm"])
-plt.show()
 ```
 
 ### Objektorienterad programmering
@@ -310,40 +261,15 @@ for (animal in animals) {
 
 ```
 
-**Python**
+## Uppgift 2 - Centrala gränsvärdessatsen
 
-```{python}
-class Animal:
-    def __init__(self, name):
-        self.name = name
-
-    def speak(self):
-        raise NotImplementedError("Subclass must implement this method")
-
-class Dog(Animal):
-    def speak(self):
-        return f"{self.name} says Woof!"
-
-class Cat(Animal):
-    def speak(self):
-        return f"{self.name} says Meow!"
-
-# Demonstrating Polymorphism
-animals = [Dog("Buddy"), Cat("Whiskers")]
-
-for animal in animals:
-    print(animal.speak())
-
-```
-
-### Uppgift 2 - Centrala gränsvärdessatsen
-
-I den här uppgiften ska ni simulera medelvärdet från 1000 stickprov från (a) N$(1, 1)$ (b) Exp$(1)$, för tre olika stickprovsstorlekar, $N = 5, 10, 30$, och sedan visualisera era resultat i histogram. 
+I den här uppgiften ska ni simulera medelvärdet från 1000 stickprov från (a) N$(1, 1)$ (b) Exp$(1)$, för tre olika stickprovsstorlekar, $N = 5, 10, 30$, och sedan visualisera era resultat i histogram. Översätt koden från R till Python.
 
 **R**
 
 ```{r}
 library(tidyverse)
+set.seed(42)
 n_replicates <- 1000
 sample_sizes <- c(5, 10, 30)
 
@@ -386,8 +312,3 @@ results |>
   theme(legend.position = "top")
 
 ```
-
-
-
-
-
