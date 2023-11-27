@@ -30,11 +30,11 @@ Ni kan sen öppna en ny fil och välja "Python script" för att köra Python, di
 
 Om ni vill skriva mer Python-kod i framtiden kan det vara värt att installera Python på er dator och använda en annan editor, t.ex. Microsofts Visual Studio. Ni behöver installera Python (se guide nedan) och förslagsvis en IDE.
 
-### Installations guide
+### Installations guide för Python
 
 1.  Gå till och scrolla längst ned till filer. Välj den fil som passar ditt operativsystem.
 2.  Installera Python enligt installations "wizarden".
-3.  Installera nödvändiga Python-paket:
+3.  Installera nödvändiga Python-paket (se [här](https://packaging.python.org/en/latest/tutorials/installing-packages/) för mer detaljerade instruktioner):
     -   **Windows**: Öppna "Command Prompt" och skriv in följande kommando `py -m pip install --upgrade pip numpy pandas matplotlib`
     -   **Mac**: Öppna "Terminal" och skriv in följande kommando `python3 -m pip install --upgrade pip numpy pandas matplotlib`
 
