@@ -3268,11 +3268,20 @@ $pear
 </section>
 <section id="e-paket" class="level3">
 <h3 class="anchored" data-anchor-id="e-paket">(e) Paket</h3>
-<p>R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera <code>tidyverse</code> för dataanalys). Python är ett “general purpose programming language” och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. <a href="https://numpy.org/"><code>numpy</code></a> används för matematiska beräkningar och är ett väldigt vanligt paket, <a href="https://pandas.pydata.org/"><code>pandas</code></a> är populärt för att jobba med tabelldata, motsvarande <code>data.frames</code> i R, och <a href="https://matplotlib.org/"><code>matplotlib</code></a> är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om de här paketen specifikt, men ni ska använda dem för att skriva om den följande koden från R till Python. Tips: För att importera paket i python så kan ni använda följande kod:</p>
+<p>R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera <code>tidyverse</code> för dataanalys). Python är ett “general purpose programming language” och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. <a href="https://numpy.org/"><code>numpy</code></a> används för matematiska beräkningar och är ett väldigt vanligt paket, <a href="https://pandas.pydata.org/"><code>pandas</code></a> är populärt för att jobba med tabelldata, motsvarande <code>data.frames</code> i R, och <a href="https://matplotlib.org/"><code>matplotlib</code></a> är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om pakete, men ni ska använda dem (och inga andra) för att skriva om den följande koden från R till Python. Beräkna medelvärdet både genom att använda <code>numpy</code> och <code>pandas</code>.</p>
+<p><strong>Tips</strong></p>
+<p>För att importera paketen och ladda datamaterialet i Python så kan ni använda följande kod:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Om ni kör Python i RStudio så behöver ni installera Python-paketen genom följande kod:</p>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://raw.githubusercontent.com/fileds/umu_stat_b_python/main/penguins.csv&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Kan ni inte ladda paketen (ej Google Colab), se till att de är installerade. Annars kan ni installera dem så här</p>
+<ul>
+<li><strong>Windows</strong>: Öppna “Command Prompt” och skriv in följande kommando <code>py -m pip install --upgrade pip numpy pandas matplotlib</code></li>
+<li><strong>Mac</strong>: Öppna “Terminal” och skriv in följande kommando <code>python3 -m pip install --upgrade pip numpy pandas matplotlib</code></li>
+</ul>
+<p>Om ni kör Python i <strong>RStudio</strong> så behöver ni installera Python-paketen genom följande kod:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&quot;numpy&quot;</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&quot;matplotlib&quot;</span>)</span>
@@ -3280,10 +3289,9 @@ $pear
 </div>
 <p><strong>R</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using base R</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;penguins.csv&quot;</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print head of data frame</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;penguins.csv&quot;</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Print head of data frame</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 1  Adelie Torgersen           39.1          18.7               181        3750
@@ -3414,7 +3422,7 @@ $pear
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.2     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
 ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ✔ purrr     1.0.1     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──

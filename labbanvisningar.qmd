@@ -127,15 +127,26 @@ multiply(2, 22)
 
 ### (e) Paket
 
-R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera `tidyverse` för dataanalys). Python är ett "general purpose programming language" och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. [`numpy`](https://numpy.org/) används för matematiska beräkningar och är ett väldigt vanligt paket, [`pandas`](https://pandas.pydata.org/) är populärt för att jobba med tabelldata, motsvarande `data.frames` i R, och [`matplotlib`](https://matplotlib.org/) är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om de här paketen specifikt, men ni ska använda dem för att skriva om den följande koden från R till Python. Tips: För att importera paket i python så kan ni använda följande kod:
+R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera `tidyverse` för dataanalys). Python är ett "general purpose programming language" och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. [`numpy`](https://numpy.org/) används för matematiska beräkningar och är ett väldigt vanligt paket, [`pandas`](https://pandas.pydata.org/) är populärt för att jobba med tabelldata, motsvarande `data.frames` i R, och [`matplotlib`](https://matplotlib.org/) är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om pakete, men ni ska använda dem (och inga andra) för att skriva om den följande koden från R till Python. Beräkna medelvärdet både genom att använda `numpy` och `pandas`.
+
+**Tips**
+
+För att importera paketen och ladda datamaterialet i Python så kan ni använda följande kod:
 
 ``` python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+df = pd.read_csv("https://raw.githubusercontent.com/fileds/umu_stat_b_python/main/penguins.csv")
 ```
 
-Om ni kör Python i RStudio så behöver ni installera Python-paketen genom följande kod:
+Kan ni inte ladda paketen (ej Google Colab), se till att de är installerade. Annars kan ni installera dem så här
+
+-   **Windows**: Öppna "Command Prompt" och skriv in följande kommando `py -m pip install --upgrade pip numpy pandas matplotlib`
+-   **Mac**: Öppna "Terminal" och skriv in följande kommando `python3 -m pip install --upgrade pip numpy pandas matplotlib`
+
+Om ni kör Python i **RStudio** så behöver ni installera Python-paketen genom följande kod:
 
 ```{r}
 #| eval: false
@@ -147,7 +158,6 @@ reticulate::py_install("pandas")
 **R**
 
 ```{r}
-# Using base R
 penguins <- read.csv("penguins.csv")
 # Print head of data frame
 head(penguins)
