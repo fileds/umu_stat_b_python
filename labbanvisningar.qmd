@@ -1,12 +1,13 @@
 ---
 title: "Introduktion till Python"
-author: "Filip Edström"
 format: 
   html:
     embed-resources: true
     toc: true
 editor: visual
 ---
+
+I den här laborationen introducerar vi grundläggande Python och visar på några några skillnader mot R. Laborationen är tänkt att ge er en introduktion till ett mer datavetenskapligt programmeringsspråk som också är mycket användbart för statistik och data science.
 
 ## Komma igång
 
@@ -48,15 +49,13 @@ R kod följer allt för sällan en enhetlig stil. Python har en [stilguide](http
 -   Klassnamn följer `CapWords`
 -   4 mellanslags indenteringsavstånd
 
-## Uppgift 1 - grunder
+## Uppgift 1 - grunder och syntax
+
+Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk så som tilldelning (\<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. Utöver syntax så skiljer sig R och Python åt på flera sätt, R är inriktat mot statistik och Python är mer generellt, ett så kallat "general purpose programming language". Python är skrivet mer datavetenskapligt, och innehåller bland annat fler explicita datastrukturer och möjligheten till at skriva objektorienterad kod. I den här uppgiften ska ni skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs och enligt de möjligheter som Python erbjuder.
 
 Ni kan lösa följande uppgifter antingen genom att skriva koden i Google Colab, använd i så fall en cell till en uppgift, eller i RStudio med hjälp av `reticulate`, eller i någon annan IDE, så länge ni kan visa upp, förklara, och köra koden. Väljer ni att lösa uppgiften i RStudio kan ni använda det här dokumentet och skriva in era lösningar, se exempel i första uppgiften
 
-### Syntax
-
-Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk, så som tilldelning (\<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. I den här uppgiften ska du skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs.
-
-**Tilldelning**
+### Tilldelning
 
 I R används `<-` för att tilldela variabler värden medan Python istället använder `=`. Skriv om följande kod till Python kod och se till att den går att köra.
 
@@ -75,7 +74,7 @@ y <- "hello"
 # Write your solution here
 ```
 
-## Datastrukturer och indexering
+### Datastrukturer och indexering
 
 En datastruktur är ett objekt som strukturerar data och möjliggör sökning, kategorisering, och lagring av information. I R används primärt två datastrukturer, vektorer och listor. I Python finns inga vektorer, bara listor, men också fler datatyper som "tuples" och "dictionaries". Använd internet, LLMs, eller [den här dokumentationen](https://docs.python.org/3/tutorial/datastructures.html#) för att läsa mer om listor, tuples, och dictionaries i Python. Gör sedan följande uppgifter:
 
@@ -263,7 +262,7 @@ for (animal in animals) {
 
 ## Uppgift 2 - Centrala gränsvärdessatsen
 
-I den här uppgiften ska ni simulera medelvärdet från 1000 stickprov från (a) N$(1, 1)$ (b) Exp$(1)$, för tre olika stickprovsstorlekar, $N = 5, 10, 30$, och sedan visualisera era resultat i histogram. Översätt koden från R till Python.
+I den här uppgiften ska ni simulera medelvärdet från 1000 stickprov från (a) N$(2, 1)$ (b) Exp$(0.5)$, för tre olika stickprovsstorlekar, $N = 5, 10, 30$, och sedan visualisera era resultat i histogram. När börjar CGS att gälla? Översätt koden från R till Python.
 
 **R**
 
@@ -284,8 +283,8 @@ for (sample_size in sample_sizes)
 {
     for (replicate in 1:n_replicates)
     {
-        mu_norm <- mean(rnorm(sample_size, 1, 1))
-        mu_exp <- mean(rexp(sample_size))
+        mu_norm <- mean(rnorm(sample_size, 2, 1))
+        mu_exp <- mean(rexp(sample_size, 0.5))
         results <- rbind(
             results,
             data.frame(
@@ -299,16 +298,20 @@ for (sample_size in sample_sizes)
                 mean = mu_exp,
                 distribution = "exp"))
     }
-    
 }
 results |> 
-    ggplot(aes(x = mean, fill = distribution)) + 
-    geom_histogram(alpha = 0.5, col = "black") +
+    ggplot(aes(x = mean, col = distribution, fill = distribution)) + 
+    geom_density(alpha = 0.3) +
     facet_wrap(~ sample_size, scales = "free") +
+  geom_vline(xintercept = 2, linetype = 2, col = "black") +
     labs(
         x = "Mean",
-        y = "Count",
-        fill = "Sample size") +
-  theme(legend.position = "top")
-
+        col = "Distribution",
+        fill = "Distribution") +
+  theme_bw() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "top")
 ```
