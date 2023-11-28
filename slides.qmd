@@ -23,6 +23,10 @@ Python
 ::: {data-id="circle-r" style="background: rgba(39, 128, 227, 0.7); width: 400px; height: 400px; border-radius: 200px; display: flex; align-items: center; justify-content: center; color: white; font-size: 36px; position: relative; left: -125px;"}
 R
 
+::: {style="position: absolute; top: 44%; left: 12%; background: rgba(255, 255, 255, 0.7); width: 100px; height: 100px; border-radius: 50px; display: flex; align-items: center; justify-content: center; color: black; font-size: 18px;"}
+`tidyverse`
+:::
+
 ::: {style="position: absolute; top: 10%; left: 56%; background: rgba(255, 255, 255, 0.7); width: 70px; height: 70px; border-radius: 35px; display: flex; align-items: center; justify-content: center; color: black; font-size: 18px;"}
 RStudio
 :::
@@ -62,7 +66,15 @@ Data science
 :::
 :::
 
+::: {.fragment style="text-align: center; margin-top: 60px;"}
+
+R: Statistics and data science
+
+:::
+
 ::: {.fragment style="text-align: center; margin-top: 40px;"}
-General Purpose Programming Language
+
+Python: General Purpose Programming Language
+
 :::
 
