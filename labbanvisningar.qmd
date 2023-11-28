@@ -4,14 +4,13 @@ format:
   html:
     embed-resources: true
     toc: true
-editor: visual
 ---
 
 I den här laborationen introducerar vi grundläggande Python och visar på några några skillnader mot R. Laborationen är tänkt att ge er en introduktion till ett mer datavetenskapligt programmeringsspråk som också är mycket användbart för statistik och data science.
 
 ## Komma igång
 
-Ni kan välja flera olika sätt att köra Python, här är tre alternativ.
+Ni kan välja flera olika sätt att köra Python. Har ni redan ett sätt som ni föredrar går det bra, men förslagsvis så skriver ni er kod i notebook-format. Nedan är tre förslag på sätt att skriva er kod.
 
 **1. Google Colab**
 
@@ -53,9 +52,11 @@ R kod följer allt för sällan en enhetlig stil. Python har en [stilguide](http
 
 Syntax inom programmering är de regler och strukturer som måste följas när du skriver kod för att programmet ska förstås och fungera korrekt. Syntaxen skiljer sig generellt mellan olika programmeringsspråk, även om det finns generella mönster som förekommer i alla språk så som tilldelning (\<-), loopar, och if/else-satser. Pythons syntax är framtaget för att vara främja läsbarheten i koden och ger en möjlighet att skriva väldigt läsbar kod. Utöver syntax så skiljer sig R och Python åt på flera sätt, R är inriktat mot statistik och Python är mer generellt, ett så kallat "general purpose programming language". Python är skrivet mer datavetenskapligt, och innehåller bland annat fler explicita datastrukturer och möjligheten till at skriva objektorienterad kod. I den här uppgiften ska ni skriva om kod från R kod till Python kod givet de skillnader i syntax som beskrivs och enligt de möjligheter som Python erbjuder.
 
-Ni kan lösa följande uppgifter antingen genom att skriva koden i Google Colab, använd i så fall en cell till en uppgift, eller i RStudio med hjälp av `reticulate`, eller i någon annan IDE, så länge ni kan visa upp, förklara, och köra koden. Väljer ni att lösa uppgiften i RStudio kan ni använda det här dokumentet och skriva in era lösningar, se exempel i första uppgiften
+Ni kan lösa följande uppgifter antingen genom att skriva koden i Google Colab, använd i så fall en cell till en uppgift, eller i RStudio med hjälp av `reticulate`, eller i någon annan IDE, så länge ni kan visa upp, förklara, och köra koden. Väljer ni att lösa uppgiften i RStudio kan ni använda det här dokumentet och skriva in era lösningar, se exempel i första uppgiften.
 
-### Tilldelning
+**Notera:** Output kan skilja sig mellan R och Python. Ni ska skriva kod som har samma funktion i båda språken, inte nödvändigtvis identisk output. T.ex. så skiljer sig output från en lista i R mot en "dictionary" i Python.
+
+### (a) Tilldelning
 
 I R används `<-` för att tilldela variabler värden medan Python istället använder `=`. Skriv om följande kod till Python kod och se till att den går att köra.
 
@@ -74,7 +75,7 @@ y <- "hello"
 # Write your solution here
 ```
 
-### Datastrukturer och indexering
+### (b) Datastrukturer och indexering
 
 En datastruktur är ett objekt som strukturerar data och möjliggör sökning, kategorisering, och lagring av information. I R används primärt två datastrukturer, vektorer och listor. I Python finns inga vektorer, bara listor, men också fler datatyper som "tuples" och "dictionaries". Använd internet, LLMs, eller [den här dokumentationen](https://docs.python.org/3/tutorial/datastructures.html#) för att läsa mer om listor, tuples, och dictionaries i Python. Gör sedan följande uppgifter:
 
@@ -97,21 +98,21 @@ d <- list(apple = "crunchy", orange = "juicy", pear = "sweet")
 d
 ```
 
-### Loopar och if/else-satser
+### (c) Loopar och if/else-satser
 
-Python använder inte "måsvingar" som i R, istället används indentering för att bestämma vilken kod som exekveras inom en loop eller en if-sats. Likt R så fungerar for-looparna som "foreach"-loopar, där det man "loopar" över är innehållet i en datastruktur, till exempel en vektor eller lista. Läs på internet, använd LLMs, eller kolla på [den här dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#if-statements) för att se exempel och lära er mer om for-loopar och if-satser. Skriv om den följande R-koden till Python-kod.
+Python använder inte "måsvingar" som i R, istället används indentering för att bestämma vilken kod som exekveras inom en loop eller en if-sats. Indentering är antalet mellanrum innan koden skrivs. Det är alltid snyggt att indentera innehåll i loopar eller if-satser, men i Python är det en del av syntaxen. Likt R så fungerar for-looparna som "foreach"-loopar, där det man "loopar" över är innehållet i en datastruktur, till exempel en vektor eller lista. Läs på internet, använd LLMs, eller kolla på [den här dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#if-statements) för att se exempel och lära er mer om for-loopar och if-satser. Skriv om den följande R-koden till Python-kod.
 
 **R**
 
 ```{r}
 numbers <- seq(1, 10)
 for (number in numbers) {
-  print(number)  
-  if (number == 5) print("Five")
+    print(number)  
+    if (number == 5) print("Five")
 }
 ```
 
-### Funktioner
+### (d) Funktioner
 
 För att definera en funktion i R använder vi `function`, men i Python använder man istället `def` och sedan funktionsnamnet. Läs den här [dokumentationen](https://docs.python.org/3/tutorial/controlflow.html#defining-functions) och översätt följande kod.
 
@@ -124,7 +125,7 @@ multiply <- function(x, y) {
 multiply(2, 22)
 ```
 
-### Paket
+### (e) Paket
 
 R är gjort specifikt för statistik. Det gör R till ett mycket användbart språk för att göra just statistisk analys, även om man allt som oftast vill använda fler paket för att skriva kraftfullare kod (jag kan rekommendera `tidyverse` för dataanalys). Python är ett "general purpose programming language" och inte byggt för ett specifikt ändamål. Därför är Python väldigt begränsat utan att importera paket och för att göra statistisk analys så behöver vi ett antal paket. [`numpy`](https://numpy.org/) används för matematiska beräkningar och är ett väldigt vanligt paket, [`pandas`](https://pandas.pydata.org/) är populärt för att jobba med tabelldata, motsvarande `data.frames` i R, och [`matplotlib`](https://matplotlib.org/) är nog det vanligaste paketet för att visualisera data. Ni behöver inte läsa på om de här paketen specifikt, men ni ska använda dem för att skriva om den följande koden från R till Python. Tips: För att importera paket i python så kan ni använda följande kod:
 
@@ -146,7 +147,6 @@ reticulate::py_install("pandas")
 **R**
 
 ```{r}
-#| eval: false
 # Using base R
 penguins <- read.csv("penguins.csv")
 # Print head of data frame
@@ -159,30 +159,11 @@ mean(penguins$flipper_length_mm, na.rm = TRUE)
 plot(penguins$bill_length_mm, penguins$bill_depth_mm)
 ```
 
-```{r}
-# Using tidyverse and piping
-library(tidyverse)
-penguins <- read_csv("penguins.csv")
-# Print head of data frame
-penguins |> head()
-# Print head of species column
-penguins |> 
-    select(species) |> 
-    head()
-# Compute mean of flipper_length_mm
-penguins |> 
-    pull(flipper_length_mm) |> 
-    mean(na.rm = TRUE)
-# Plot bill_length_mm vs bill_depth_mm
-penguins |> 
-    ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
-    geom_point() + 
-    theme_bw()
-```
+### (f) Objektorienterad programmering
 
-### Objektorienterad programmering
+R är ett "functional programming languange" som lämpar sig för att använda funktioner på funktioner, därav "pipe"-operatorn. Python tillåter "functional programming" men mycket Python-kod är skrivet som "Object Oriented Programming (OOP)". Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kalalde fält, och funktioner, ibland kallade metoder. Ett annat kraftullt koncept inom objektorienterad programmering är arv: möjligheten för klasser att ärva från en superklass. Ni kan läsa mer om klasser [här](https://docs.python.org/3/tutorial/classes.html). 
 
-R är ett "functional programming languange" som lämpar sig för att använda funktioner på funktioner, därav "pipe"-operatorn. Python tillåter "functional programming" men mycket Python-kod är skrivet som "Object Oriented Programming (OOP)". Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kalalde fält, och funktioner, ibland kallade metoder. EN annan kraftfull idé inom objektorienterad programmering är klasser som ärver från superklasser. I den här uppgiften ska ni skriva om R kod till objektorienterad Python kod. Först visar vi ett exempel på objectorienterad kod skriven i Python. I det här exemplet ser vi hur klassen `Bike` skapas genom att ärva klassen `Vehicle` och implementera funktionen `n_wheels` som returnerar antalet hjul fordonet har. Vi använder sedan punkt `.` för att komma åt fält och metoder inom klassen. Notera att `.` är reserverat för det här ändamålet i Python, ni kan därmed inte använda det i variabelnamn.
+I den här uppgiften ska ni skriva om R kod till objektorienterad Python kod. Först visar vi ett exempel på objectorienterad kod skriven i Python. I det här exemplet ser vi hur klassen `Bike` skapas genom att ärva klassen `Vehicle` och implementera funktionen `n_wheels` som returnerar antalet hjul fordonet har. Vi använder sedan punkt `.` för att komma åt fält och metoder inom klassen. Notera att `.` är reserverat för det här ändamålet i Python, ni kan därmed inte använda det i variabelnamn.
 
 ```{python}
 # Define super class Vehicle
@@ -213,49 +194,49 @@ Baserat på det här exemplet, skriv om följande R-kod till Python-kod med en s
 ```{r}
 # Define the generic speak method
 speak <- function(animal) {
-  UseMethod("speak", animal)
+    UseMethod("speak", animal)
 }
 
 # Define the Animal class constructor
 Animal <- function(name) {
-  class <- "Animal"
-  list(name = name, class = class)
+    class <- "Animal"
+    list(name = name, class = class)
 }
 
 # Define the Dog class constructor
 Dog <- function(name) {
-  animal <- Animal(name)
-  class(animal) <- c("Dog", class(animal))
-  animal
+    animal <- Animal(name)
+    class(animal) <- c("Dog", class(animal))
+    animal
 }
 
 # Define the Cat class constructor
 Cat <- function(name) {
-  animal <- Animal(name)
-  class(animal) <- c("Cat", class(animal))
-  animal
+    animal <- Animal(name)
+    class(animal) <- c("Cat", class(animal))
+    animal
 }
 
 # Define the speak method for Animal (base)
 speak.Animal <- function(animal) {
-  stop("Subclass must implement this method")
+    stop("Subclass must implement this method")
 }
 
 # Define the speak method for Dog
 speak.Dog <- function(animal) {
-  paste(animal$name, "says Woof!")
+    paste(animal$name, "says Woof!")
 }
 
 # Define the speak method for Cat
 speak.Cat <- function(animal) {
-  paste(animal$name, "says Meow!")
+    paste(animal$name, "says Meow!")
 }
 
 # Demonstrating Polymorphism
 animals <- list(Dog("Buddy"), Cat("Whiskers"))
 
 for (animal in animals) {
-  print(speak(animal))
+    print(speak(animal))
 }
 
 ```

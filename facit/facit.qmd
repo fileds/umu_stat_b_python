@@ -9,7 +9,7 @@ format:
 
 ## Uppgift 1 - grunder och syntax
 
-### Tilldelning
+### (a) Tilldelning
 
 
 
@@ -21,7 +21,7 @@ x = 10
 y = "hello"
 ```
 
-### Datastrukturer och indexering
+### (b) Datastrukturer och indexering
 
 **Python**
 
@@ -37,7 +37,7 @@ d = {"apple": "crunchy", "orange": "juicy", "pear": "sweet"}
 print(d)
 ```
 
-### Loopar och if/else-satser
+### (c) Loopar och if/else-satser
 
 **Python**
 
@@ -49,7 +49,7 @@ for number in numbers:
         print("Five")
 ```
 
-### Funktioner
+### (d) Funktioner
 
 **Python**
 
@@ -59,7 +59,7 @@ def multiply(x, y):
 multiply(2, 22)
 ```
 
-### Paket
+### (e) Paket
 
 **Python**
 
@@ -81,7 +81,7 @@ plt.scatter(penguins["bill_length_mm"], penguins["bill_depth_mm"])
 plt.show()
 ```
 
-### Objektorienterad programmering
+### (f) Objektorienterad programmering
 
 **Python**
 
