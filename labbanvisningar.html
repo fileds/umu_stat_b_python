@@ -3327,8 +3327,21 @@ $pear
 </section>
 <section id="f-objektorienterad-programmering" class="level3">
 <h3 class="anchored" data-anchor-id="f-objektorienterad-programmering">(f) Objektorienterad programmering</h3>
-<p>R är ett “functional programming languange” som lämpar sig för att använda funktioner på funktioner, därav “pipe”-operatorn. Python tillåter “functional programming” men mycket Python-kod är skrivet som “Object Oriented Programming (OOP)”. Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kalalde fält, och funktioner, ibland kallade metoder. Ett annat kraftullt koncept inom objektorienterad programmering är arv: möjligheten för klasser att ärva från en superklass. Ni kan läsa mer om klasser <a href="https://docs.python.org/3/tutorial/classes.html">här</a>.</p>
-<p>I den här uppgiften ska ni skriva om R kod till objektorienterad Python kod. Först visar vi ett exempel på objectorienterad kod skriven i Python. I det här exemplet ser vi hur klassen <code>Bike</code> skapas genom att ärva klassen <code>Vehicle</code> och implementera funktionen <code>n_wheels</code> som returnerar antalet hjul fordonet har. Vi använder sedan punkt <code>.</code> för att komma åt fält och metoder inom klassen. Notera att <code>.</code> är reserverat för det här ändamålet i Python, ni kan därmed inte använda det i variabelnamn.</p>
+<p>R är ett “functional programming languange” som lämpar sig för att använda funktioner på funktioner, därav “pipe”-operatorn. Python tillåter “functional programming” men mycket Python-kod är skrivet som “Object Oriented Programming (OOP)” eller objektorienterad programmering på svenska. Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kallade fält, och funktioner, ibland kallade metoder. Ett annat kraftullt koncept inom objektorienterad programmering är arv: möjligheten för klasser att ärva från en superklass. Ni kan läsa mer om klasser <a href="https://docs.python.org/3/tutorial/classes.html">här</a>. “Functional programmin” är väldigt användbart för just statistik och data science, men OOP har stora fördelar i andra tillämpningar. I den här uppgiften är tanken att ni ska få en idé om fördelarna med OOP i en helt annan tillämpning än statistik/data science.</p>
+<p>I den här uppgiften ska ni skriva objektorienterad kod. Er kod ska</p>
+<ol type="1">
+<li>Definera en superklass <code>Customer</code> med fälten <code>name</code> och <code>email</code> och med den oimplementerade metoden <code>send_newsletter</code> (se exempel med <code>n_wheels</code> nedan).</li>
+<li>Definera två subklasser, <code>RegularCustomer</code> och <code>PremiumCustomer</code>, som implementerar <code>send_newsletter</code> genom att skriva ut (<code>print</code>) följande strängar:
+<ul>
+<li><code>RegularCustomer</code>: <code>[mailto:&lt;email&gt;]Dear &lt;name&gt;, check out our weekly deals!</code> och för</li>
+<li><code>PremiumCustomer</code>: <code>[mailto:&lt;email&gt;]Dear &lt;name&gt;, enjoy exclusive premium offers and discounts!</code>.</li>
+</ul></li>
+<li>Skapa en <code>RegularCustomer</code>, Alex, och en <code>PremiumCustomer</code>, Jordan, och spara dem i en lista, <code>customers</code>.</li>
+<li>Skicka ut nyhetsbrev (skriva ut) till alla kunder i listan <code>customers</code> i en for-loop.</li>
+</ol>
+<p>Utgå från Python exemplet för att skriva er kod, och R exemplet längre ned för att se hur utskrifterna ska se ut. Observera skillnaden i <em>koden</em>, R är inte ett objektorienterat språk utan använder istället funktioner.</p>
+<p><strong>Exempel Python</strong></p>
+<p>I det här exemplet ser vi hur subklassen <code>Bike</code> skapas genom att ärva superklassen <code>Vehicle</code> och implementera funktionen <code>n_wheels</code> som returnerar antalet hjul fordonet har. För att komma åt fält och metoder inom en <em>instans</em> av en klass, dvs. en realisation av klassen, använder vi punkt, <code>.</code>. Notera att <code>.</code> är reserverat för det här ändamålet i Python, och ni kan därmed inte använda det i variabelnamn.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define super class Vehicle</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vehicle:</span>
@@ -3356,58 +3369,50 @@ $pear
 <pre><code>2</code></pre>
 </div>
 </div>
-<p>Baserat på det här exemplet, skriv om följande R-kod till Python-kod med en superklass <code>Animal</code> och två subklasser, <code>Dog</code> och <code>Cat</code> som implementerar funktionen <code>speak</code>.</p>
-<p><strong>R</strong></p>
+<p><strong>Exempel R</strong></p>
+<p>Den här koden åstadkommer det ni ska göra i Python, men i R. R är ett “functional programming language” och har stöder inte OOP naturligt, istället måste funktioner användas. Observera att ni ska utgå från Python-koden ovan och ni behöver inte förstå R koden i sin helhet, bara observera utskrifterna längst ned.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the generic speak method</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>speak <span class="ot">&lt;-</span> <span class="cf">function</span>(animal) {</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">UseMethod</span>(<span class="st">&quot;speak&quot;</span>, animal)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Animal class constructor</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>Animal <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    class <span class="ot">&lt;-</span> <span class="st">&quot;Animal&quot;</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">name =</span> name, <span class="at">class =</span> class)</span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Customer &#39;class&#39;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Customer <span class="ot">&lt;-</span> <span class="cf">function</span>(name, email) {</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">name =</span> name,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">email =</span> email,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">send_newsletter =</span> <span class="cf">function</span>() {</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stop</span>(<span class="st">&quot;send_newsletter() needs to be defined in the subclass.&quot;</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Dog class constructor</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>Dog <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    animal <span class="ot">&lt;-</span> <span class="fu">Animal</span>(name)</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">class</span>(animal) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dog&quot;</span>, <span class="fu">class</span>(animal))</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    animal</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Cat class constructor</span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>Cat <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    animal <span class="ot">&lt;-</span> <span class="fu">Animal</span>(name)</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">class</span>(animal) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cat&quot;</span>, <span class="fu">class</span>(animal))</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    animal</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the speak method for Animal (base)</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>speak.Animal <span class="ot">&lt;-</span> <span class="cf">function</span>(animal) {</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Subclass must implement this method&quot;</span>)</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the speak method for Dog</span></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>speak.Dog <span class="ot">&lt;-</span> <span class="cf">function</span>(animal) {</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(animal<span class="sc">$</span>name, <span class="st">&quot;says Woof!&quot;</span>)</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the RegularCustomer &#39;subclass&#39;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>RegularCustomer <span class="ot">&lt;-</span> <span class="cf">function</span>(name, email) {</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    customer <span class="ot">&lt;-</span> <span class="fu">Customer</span>(name, email)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    customer<span class="sc">$</span>send_newsletter <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;[mailto:%s]Dear %s, check out our weekly deals!</span><span class="sc">\n</span><span class="st">&quot;</span>, customer<span class="sc">$</span>email, customer<span class="sc">$</span>name))</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    customer</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the PremiumCustomer &#39;subclass&#39;</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>PremiumCustomer <span class="ot">&lt;-</span> <span class="cf">function</span>(name, email) {</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    customer <span class="ot">&lt;-</span> <span class="fu">Customer</span>(name, email)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    customer<span class="sc">$</span>send_newsletter <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;[mailto:%s]Dear %s, enjoy exclusive premium offers and discounts!</span><span class="sc">\n</span><span class="st">&quot;</span>, customer<span class="sc">$</span>email, customer<span class="sc">$</span>name))</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    customer</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>customers <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">RegularCustomer</span>(<span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;alex@example.com&quot;</span>), </span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">PremiumCustomer</span>(<span class="st">&quot;Jordan&quot;</span>, <span class="st">&quot;jordan@example.com&quot;</span>)</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the speak method for Cat</span></span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>speak.Cat <span class="ot">&lt;-</span> <span class="cf">function</span>(animal) {</span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(animal<span class="sc">$</span>name, <span class="st">&quot;says Meow!&quot;</span>)</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrating Polymorphism</span></span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">Dog</span>(<span class="st">&quot;Buddy&quot;</span>), <span class="fu">Cat</span>(<span class="st">&quot;Whiskers&quot;</span>))</span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (animal <span class="cf">in</span> animals) {</span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">speak</span>(animal))</span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (customer <span class="cf">in</span> customers) {</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    customer<span class="sc">$</span><span class="fu">send_newsletter</span>()</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;Buddy says Woof!&quot;
-[1] &quot;Whiskers says Meow!&quot;</code></pre>
+<pre><code>[mailto:alex@example.com]Dear Alex, check out our weekly deals!
+[mailto:jordan@example.com]Dear Jordan, enjoy exclusive premium offers and discounts!</code></pre>
 </div>
 </div>
 </section>

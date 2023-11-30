@@ -171,9 +171,22 @@ plot(penguins$bill_length_mm, penguins$bill_depth_mm)
 
 ### (f) Objektorienterad programmering
 
-R är ett "functional programming languange" som lämpar sig för att använda funktioner på funktioner, därav "pipe"-operatorn. Python tillåter "functional programming" men mycket Python-kod är skrivet som "Object Oriented Programming (OOP)". Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kalalde fält, och funktioner, ibland kallade metoder. Ett annat kraftullt koncept inom objektorienterad programmering är arv: möjligheten för klasser att ärva från en superklass. Ni kan läsa mer om klasser [här](https://docs.python.org/3/tutorial/classes.html). 
+R är ett "functional programming languange" som lämpar sig för att använda funktioner på funktioner, därav "pipe"-operatorn. Python tillåter "functional programming" men mycket Python-kod är skrivet som "Object Oriented Programming (OOP)" eller objektorienterad programmering på svenska. Tanken med objektorienterad programmering är att jobba så mycket som möjligt med objekt som har inbyggda variabler, ibland kallade fält, och funktioner, ibland kallade metoder. Ett annat kraftullt koncept inom objektorienterad programmering är arv: möjligheten för klasser att ärva från en superklass. Ni kan läsa mer om klasser [här](https://docs.python.org/3/tutorial/classes.html). "Functional programmin" är väldigt användbart för just statistik och data science, men OOP har stora fördelar i andra tillämpningar. I den här uppgiften är tanken att ni ska få en idé om fördelarna med OOP i en helt annan tillämpning än statistik/data science.
 
-I den här uppgiften ska ni skriva om R kod till objektorienterad Python kod. Först visar vi ett exempel på objectorienterad kod skriven i Python. I det här exemplet ser vi hur klassen `Bike` skapas genom att ärva klassen `Vehicle` och implementera funktionen `n_wheels` som returnerar antalet hjul fordonet har. Vi använder sedan punkt `.` för att komma åt fält och metoder inom klassen. Notera att `.` är reserverat för det här ändamålet i Python, ni kan därmed inte använda det i variabelnamn.
+I den här uppgiften ska ni skriva objektorienterad kod. Er kod ska 
+
+1. Definera en superklass `Customer` med fälten `name` och `email` och med den oimplementerade metoden `send_newsletter` (se exempel med `n_wheels` nedan).
+2. Definera två subklasser, `RegularCustomer` och `PremiumCustomer`, som implementerar `send_newsletter` genom att skriva ut (`print`) följande strängar:
+    * `RegularCustomer`: `[mailto:<email>]Dear <name>, check out our weekly deals!` och för 
+    * `PremiumCustomer`: `[mailto:<email>]Dear <name>, enjoy exclusive premium offers and discounts!`. 
+3. Skapa en `RegularCustomer`, Alex, och en `PremiumCustomer`, Jordan, och spara dem i en lista, `customers`.
+4. Skicka ut nyhetsbrev (skriva ut) till alla kunder i listan `customers` i en for-loop.
+
+Utgå från Python exemplet för att skriva er kod, och R exemplet längre ned för att se hur utskrifterna ska se ut. Observera skillnaden i *koden*, R är inte ett objektorienterat språk utan använder istället funktioner.
+
+**Exempel Python**
+
+I det här exemplet ser vi hur subklassen `Bike` skapas genom att ärva superklassen `Vehicle` och implementera funktionen `n_wheels` som returnerar antalet hjul fordonet har. För att komma åt fält och metoder inom en *instans* av en klass, dvs. en realisation av klassen, använder vi punkt, `.`. Notera att `.` är reserverat för det här ändamålet i Python, och ni kan därmed inte använda det i variabelnamn.
 
 ```{python}
 # Define super class Vehicle
@@ -197,58 +210,49 @@ bike.name
 bike.n_wheels()
 ```
 
-Baserat på det här exemplet, skriv om följande R-kod till Python-kod med en superklass `Animal` och två subklasser, `Dog` och `Cat` som implementerar funktionen `speak`.
+**Exempel R**
 
-**R**
+Den här koden åstadkommer det ni ska göra i Python, men i R. R är ett "functional programming language" och har stöder inte OOP naturligt, istället måste funktioner användas. Observera att ni ska utgå från Python-koden ovan och ni behöver inte förstå R koden i sin helhet, bara observera utskrifterna längst ned.
 
 ```{r}
-# Define the generic speak method
-speak <- function(animal) {
-    UseMethod("speak", animal)
+# Define the Customer 'class'
+Customer <- function(name, email) {
+    list(
+      name = name,
+      email = email,
+      send_newsletter = function() {
+        stop("send_newsletter() needs to be defined in the subclass.")
+      }
+    )
 }
 
-# Define the Animal class constructor
-Animal <- function(name) {
-    class <- "Animal"
-    list(name = name, class = class)
+# Define the RegularCustomer 'subclass'
+RegularCustomer <- function(name, email) {
+    customer <- Customer(name, email)
+    customer$send_newsletter <- function() {
+      cat(sprintf("[mailto:%s]Dear %s, check out our weekly deals!\n", customer$email, customer$name))
+    }
+    customer
 }
 
-# Define the Dog class constructor
-Dog <- function(name) {
-    animal <- Animal(name)
-    class(animal) <- c("Dog", class(animal))
-    animal
+# Define the PremiumCustomer 'subclass'
+PremiumCustomer <- function(name, email) {
+    customer <- Customer(name, email)
+    customer$send_newsletter <- function() {
+      cat(sprintf("[mailto:%s]Dear %s, enjoy exclusive premium offers and discounts!\n", customer$email, customer$name))
+    }
+    customer
 }
 
-# Define the Cat class constructor
-Cat <- function(name) {
-    animal <- Animal(name)
-    class(animal) <- c("Cat", class(animal))
-    animal
+# Example usage
+customers <- list(
+    RegularCustomer("Alex", "alex@example.com"), 
+    PremiumCustomer("Jordan", "jordan@example.com")
+)
+
+for (customer in customers) {
+    customer$send_newsletter()
 }
-
-# Define the speak method for Animal (base)
-speak.Animal <- function(animal) {
-    stop("Subclass must implement this method")
-}
-
-# Define the speak method for Dog
-speak.Dog <- function(animal) {
-    paste(animal$name, "says Woof!")
-}
-
-# Define the speak method for Cat
-speak.Cat <- function(animal) {
-    paste(animal$name, "says Meow!")
-}
-
-# Demonstrating Polymorphism
-animals <- list(Dog("Buddy"), Cat("Whiskers"))
-
-for (animal in animals) {
-    print(speak(animal))
-}
-
 ```
 
 ## Uppgift 2 - Centrala gränsvärdessatsen
